@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="header">
+    <div id="topo">
+        <h3><i class="fa fa-home topo"></i>Lista de Serviços em aberto</h3>
+        <div id="div-btn-add">
+            <p>Adcionar serviço</p>
+            <button type="button" id="btn-add" data-toggle="modal" data-target="#ExemploModalCentralizado"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="lista">
+        <table class="table" id="topo-tabela">
+            <thead>
+                <tr>
+                    <th class="col-md-3">Cliente</th>
+                    <th class="col-md-4">Serviço</th>
+                    <th class="col-md-1">Status</th>
+                    <th class="col-md-2">Data do cadastro</th>
+                    <th class="col-md-2"></th>
+                </tr>
+            </thead>
+        </table>
+        <table class="table">
+            <tbody>
+                <tr style="text-align: center;">
+                    <th class="col-md-3 texto-lista">Bruno Eduardo</th>
+                    <td class="col-md-4 texto-lista">Emprestimo rural</td>
+                    <td class="col-md-1 texto-lista">
+                        <p class="concluido">Feito</p>
+                    </td>
+                    <td class="col-md-2 texto-lista">10/11/2022</td>
+                    <td class="col-md-2">
+                        <button class="btn btn-primary btn-lista" onclick="abrirModal()"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
+                        <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
