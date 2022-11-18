@@ -1,8 +1,4 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-<div id="header">
+﻿<div id="header">
     <div id="topo">
         <h3><i class="fa fa-home topo"></i>Lista de Serviços em aberto</h3>
         <div id="div-btn-add">
@@ -42,4 +38,34 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="modal" id="modal">
+    <img src="/assets/img/CIMA.jpg" id="topo-modal" class="print">
+    <div class="modal-content">
+        <div class="btn-modal no-print" style="text-align: right;">
+            <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
+        </div>
+        <div id="info-modal" class="conteudo">
+            <h2 class="titulo-modal">Detalhes do Serviço</h2>
+            <p><b>Nome: </b>Bruno Eduardo</p>
+            <p><b>Tipo de serviço: </b>Descrição do serviço</p>
+            <p><b>Status: </b>Em aberto</p>
+            <p><b>Propriedade: </b>Nome da propriedade</p>
+            <br>
+            <p><b>Complemento</b></p>
+            <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta nihil, cum voluptate! </p><p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta at quae facilis inventore molestiae soluta nihil, cum voluptate! </p><p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta nihil, cum voluptate! </p><p> Lorem ipsum dolor sit amet consectetur, adipisicingadipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta nihil, cum voluptate! </p>
+            <br>
+            <p><b>Valor: </b>R$1.000,00</p>
+            <p><b>Tipo: </b>Débito</p>
+            <p><b>Status do pagamento: </b>Pago</p>
+            <br>
+            <br>
+        </div>
+        <div class="btn-modal no-print" style="text-align: center;">
+            <button class="btn btn-success" onclick="window.print()"><i class="fa fa-print"></i></button>
+            <p>Imprimir</p>
+        </div>
+    </div>
+    <img src="/assets/img/BAIXO.jpg" id="base-modal" class="print">
 </div>
