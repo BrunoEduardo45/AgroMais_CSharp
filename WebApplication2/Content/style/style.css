@@ -23,7 +23,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 350px;
-    box-shadow: 0px 0px 15px #5b5b5b;
+    box-shadow: 0px 0px 15px #c0c0c0;
 }
 #top{
     height: 85%;
@@ -100,12 +100,13 @@ nav i{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 0px 15px #8A8A8A;
+    box-shadow: 0px 0px 15px #c0c0c0;
 }
 #topo h3 {
     font-size: 22px;
     margin-left: 25px;
     margin-bottom: 0px;
+    margin-top: 0px;
     color: #3f6128;
     font-weight: bold;
 }
@@ -147,7 +148,7 @@ nav i{
     height: 100%;
     padding: 30px;
     border-radius: 30px;
-    box-shadow: 0px 0px 15px #8A8A8A;
+    box-shadow: 0px 0px 15px #c0c0c0;
     pointer-events: auto;
 }
 table{
@@ -264,9 +265,13 @@ table{
     border-radius: 100px;
 }
 .btn-cadastrar:hover{
-    background-color:#324e20;
+    background-color: #324e20;
 }
-.form-control{
-    border-radius:5px;    
-    margin-bottom:-15px;
+.form-control, .form-select {
+    border-radius: 5px;
+    margin-bottom: -15px;
+}
+.form-select {
+    padding: 6px;
+    font-size:14px;
 }

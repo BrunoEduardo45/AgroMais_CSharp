@@ -11,48 +11,53 @@
 </div>
 <div id="container">
     <div id="lista">
+        <h1>Dados do cliente</h1>
+        <br class="dont-print">
+        <br class="dont-print">
+
         <div class="row" id="formulario">
-            <div class="col-md-8 mb-8">
+            <div class="col-md-4 mb-4">
                 <label><b>Nome:</b></label>
                 <input type="text" class="form-control" name="CLI_NOME" id="CLI_NOME">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
+                <label><b>Profissão:</b></label>
+                <input type="text" class="form-control" name="CLI_PROFISSAO" id="CLI_PROFISSAO">
+                <br class="dont-print">
+            </div>
+            <div class="col-md-2 mb-2">
                 <label><b>Sexo:</b></label>
-                <select class="form-control"  name="CLI_SEXO" id="CLI_SEXO">
+                <select class="form-select" name="CLI_SEXO" id="CLI_SEXO">
+                    <option value="" selected>Selecione</option>
                     <option value="0">Masculino</option>
                     <option value="1">Feminino</option>
                 </select>
                 <br class="dont-print">
             </div>
+            <div class="col-md-2 mb-2">
+                <label><b>Data de Nascimento:</b></label>
+                <input type="date" class="form-control date" name="CLI_DATA_NASC" id="CLI_DATA_NASC">
+                <br class="dont-print">
+            </div>
             <div class="col-md-4 mb-4">
                 <label><b>CPF:</b></label>
-                <input type="text" class="form-control" name="CLI_CPF" id="CLI_CPF">
+                <input type="text" class="form-control cpf" name="CLI_CPF" id="CLI_CPF">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
                 <label><b>CNPJ:</b></label>
-                <input type="text" class="form-control" name="CLI_CNPJ" id="CLI_CNPJ">
+                <input type="text" class="form-control cnpj" name="CLI_CNPJ" id="CLI_CNPJ">
                 <br class="dont-print">
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4"> <!--mask-->
                 <label><b>RG:</b></label>
-                <input type="text" class="form-control" name="CLI_RG" id="CLI_RG" >
-                <br class="dont-print">
-            </div>
-            <div class="col-md-4 mb-4">
-                <label><b>Data de Nascimento:</b></label>
-                <input type="text" class="form-control" name="CLI_DATA_NASC" id="CLI_DATA_NASC" >
-                <br class="dont-print">
-            </div>
-            <div class="col-md-4 mb-4">
-                <label><b>Profissão:</b></label>
-                <input type="text" class="form-control" name="CLI_PROFISSAO" id="CLI_PROFISSAO" >
+                <input type="text" class="form-control" name="CLI_RG" id="CLI_RG">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
                 <label><b>Telefone:</b></label>
-                <input type="text" class="form-control" name="CLI_TELEFONE" id="CLI_TELEFONE" >
+                <input type="text" class="form-control" name="CLI_TELEFONE" id="CLI_TELEFONE">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
@@ -62,7 +67,12 @@
             </div>
             <div class="col-md-4 mb-4">
                 <label><b>Email:</b></label>
-                <input type="text" class="form-control" name="CLI_EMAIL" id="CLI_EMAIL" >
+                <input type="text" class="form-control" name="CLI_EMAIL" id="CLI_EMAIL">
+                <br class="dont-print">
+            </div>
+            <div class="col-md-4 mb-4">
+                <label><b>CEP:</b></label>
+                <input type="text" class="form-control" name="CLI_CEP" id="CLI_CEP">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
@@ -90,12 +100,11 @@
                 <input type="text" class="form-control" name="CLI_COMPLEMENTO" id="CLI_COMPLEMENTO">
                 <br class="dont-print">
             </div>
-            <div class="col-md-4 mb-4">
-                <label><b>CEP:</b></label>
-                <input type="text" class="form-control" name="CLI_CEP" id="CLI_CEP">
-                <br class="dont-print">
-            </div>
         </div>
+
+        <br class="dont-print">
         <button class="btn-cadastrar">Cadastrar <i class="fa fa-plus"></i></button>
     </div>
 </div>
+<script>
+</script>
