@@ -270,8 +270,10 @@ table{
 .form-control, .form-select {
     border-radius: 5px;
     margin-bottom: -15px;
+    margin-top: 5px;
 }
 .form-select {
     padding: 6px;
-    font-size:14px;
+    font-size: 14px;
+    margin-top: 5px;
 }

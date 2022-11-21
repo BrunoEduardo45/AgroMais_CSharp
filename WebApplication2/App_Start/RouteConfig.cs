@@ -19,6 +19,11 @@ namespace WebApplication2
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                "addservico",
+                "addservico",
+                new { controller = "Home", action = "addServico" }
+            );
+            routes.MapRoute(
                 "clientes",
                 "clientes",
                 new {controller = "Home", action = "Clientes"}

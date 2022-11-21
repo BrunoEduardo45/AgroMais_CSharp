@@ -11,6 +11,10 @@ namespace WebApplication2.Controllers
         public ActionResult Index()
         {
             return View();
+        }        
+        public ActionResult addServico()
+        {
+            return View();
         }
 
         public ActionResult Clientes()
