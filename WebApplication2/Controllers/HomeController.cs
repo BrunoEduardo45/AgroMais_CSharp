@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AgroMais.Models;
+using AgroMais.DAO;
 
-namespace WebApplication2.Controllers
+namespace AgroMais.Controllers
 {
     public class HomeController : Controller
     {
@@ -16,20 +15,30 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
         public ActionResult Clientes()
         {
             return View();
         }
-        
         public ActionResult addCliente()
         {
             return View();
         }
-
         public ActionResult Configuracao()
         {
             return View();
+        }
+
+        //--------------------------------------------------------//
+        [HttpPost]
+        public JsonResult adicionarCliente(Clientes cliente)
+        {
+            HomeDAO dao = new HomeDAO();
+            try
+            {
+                dao.adicionarCliente(cliente);
+            }
+            catch (Exception ex) { return Json(new { erro = true, mensagem = ex.Message, status = "ERRO" }); }
+            return Json(new { erro = false, mensagem = "Cliente adicionado com sucesso!", status = "SUCESSO" });
         }
     }
 }

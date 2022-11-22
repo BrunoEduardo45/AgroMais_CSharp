@@ -15,7 +15,7 @@
         <br class="dont-print">
         <br class="dont-print">
 
-        <div class="row" id="formulario">
+        <form class="row" id="formulario">
             <div class="col-md-4 mb-4">
                 <label><b>Nome:</b></label>
                 <input type="text" class="form-control" name="CLI_NOME" id="CLI_NOME">
@@ -100,11 +100,41 @@
                 <input type="text" class="form-control" name="CLI_COMPLEMENTO" id="CLI_COMPLEMENTO">
                 <br class="dont-print">
             </div>
-        </div>
+        </form>
 
         <br class="dont-print">
-        <button class="btn-cadastrar">Cadastrar <i class="fa fa-plus"></i></button>
+        <button class="btn-cadastrar" onclick="adicionarCliente()">Cadastrar <i class="fa fa-plus"></i></button>
     </div>
 </div>
 <script>
+    function adicionarCliente() {
+        debugger;
+            mostraPreload();
+            var data = $('#formulario').serializeArray();
+
+            var resultado = false;
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("adicionarCliente", "Home")',
+                data: data,
+                dataType: 'json',
+                success: function (retorno) {
+                    removePreload();
+                    if (retorno.erro === false)
+                    {
+                        ShowMensagem(retorno.mensagem, retorno.status, 3000);
+                        setTimeout(function () { document.location.reload(true); }, 2000);
+                    }
+                    else {
+                        ShowMensagem(retorno.mensagem, retorno.status, 3000);
+                    }
+                    resultado = true;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    removePreload();
+                    ShowMensagem(thrownError, "ERRO", 3000);
+                }
+            });
+        return resultado;
+    };
 </script>
