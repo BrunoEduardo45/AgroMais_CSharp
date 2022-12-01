@@ -197,6 +197,7 @@
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\cep.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -226,6 +227,7 @@
     <Content Include="Views\Home\addCliente.cshtml" />
     <Content Include="Views\Home\addServico.cshtml" />
     <Content Include="Views\Home\addPropiedade.cshtml" />
+    <Content Include="Scripts\jsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

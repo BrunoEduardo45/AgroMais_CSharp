@@ -72,43 +72,46 @@
             </div>
             <div class="col-md-4 mb-4">
                 <label><b>CEP:</b></label>
-                <input type="text" class="form-control" name="CLI_CEP" id="CLI_CEP" placeholder="##.###-###" onkeyup="mascara('##.###-###',this,event,true)" maxlength="10">
+                <input type="text" class="form-control" name="CLI_CEP" id="cep" placeholder="##.###-###" onkeyup="mascara('##.###-###',this,event,true)" maxlength="10">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
                 <label><b>Logradouro:</b></label>
-                <input type="text" class="form-control" name="CLI_LOGRADOURO" id="CLI_LOGRADOURO">
-                <br class="dont-print">
-            </div>
-            <div class="col-md-4 mb-4">
-                <label><b>Município:</b></label>
-                <input type="text" class="form-control" name="CLI_MUNICIPIO" id="CLI_MUNICIPIO">
-                <br class="dont-print">
-            </div>
-            <div class="col-md-4 mb-4">
-                <label><b>Bairro:</b></label>
-                <input type="text" class="form-control" name="CLI_BAIRRO" id="CLI_BAIRRO">
-                <br class="dont-print">
-            </div>
-            <div class="col-md-4 mb-4">
-                <label><b>Número:</b></label>
-                <input type="text" class="form-control" name="CLI_NUMERO" id="CLI_NUMERO">
+                <input type="text" class="form-control" name="CLI_LOGRADOURO" id="logradouro">
                 <br class="dont-print">
             </div>
             <div class="col-md-4 mb-4">
                 <label><b>Complemento:</b></label>
-                <input type="text" class="form-control" name="CLI_COMPLEMENTO" id="CLI_COMPLEMENTO">
+                <input type="text" class="form-control" name="CLI_COMPLEMENTO" id="complemento">
+                <br class="dont-print">
+            </div>
+            <div class="col-md-4 mb-4">
+                <label><b>Bairro:</b></label>
+                <input type="text" class="form-control" name="CLI_BAIRRO" id="bairro">
+                <br class="dont-print">
+            </div>
+            <div class="col-md-4 mb-4">
+                <label><b>Município:</b></label>
+                <input type="text" class="form-control" name="CLI_MUNICIPIO" id="localidade">
+                <br class="dont-print">
+            </div>
+            <div class="col-md-2 mb-2">
+                <label><b>UF:</b></label>
+                <input type="text" class="form-control" name="CLI_UF" id="uf">
+                <br class="dont-print">
+            </div>
+            <div class="col-md-2 mb-2">
+                <label><b>Número:</b></label>
+                <input type="text" class="form-control" name="CLI_NUMERO" id="numero">
                 <br class="dont-print">
             </div>
         </form>
-
         <br class="dont-print">
         <button class="btn-cadastrar" onclick="adicionarCliente()">Cadastrar <i class="fa fa-plus"></i></button>
     </div>
 </div>
 <script>
     function adicionarCliente() {
-        debugger;
             mostraPreload();
             var data = $('#formulario').serializeArray();
 

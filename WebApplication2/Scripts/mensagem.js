@@ -4,25 +4,30 @@
         if (tempo > 0)
             tempomensagem = tempo;
     }
-    //if (mensagem.indexOf("</li>") <= 0) {
-    //   mensagem = "<li style='margin:5px;'>" + mensagem + "</li>";
-    //}
-    //if (mensagem.indexOf("</ul>") <= 0) {
-    //    mensagem = "<ul class='checkvalida'>" + mensagem + "</ul>";
-    //}
+    var iconMensagem = '';
+    if (tipomsg.toLowerCase() == "erro") {
+        var iconMensagem = '<i class="fa fa-close fa-5x" style="color:red"></i>'
+    }    
+    if (tipomsg.toLowerCase() != "erro") {
+        var iconMensagem = '<i class="fa fa-check-circle fa-5x" style="color:rgb(93, 125, 72)"></i>'
+    }
+
     var id = guidGenerator();
     nomediv = 'msgerro_' + id;
     if ($("#addMsnErro").length == 0)
-    { $("body").prepend('<div id="addMsnErro"style="background-color:#fff;width:100px;height:100px;position:fixed;top:50%;left:50%;margin-top:-100px;margin-left:-100px;z-index:9999900;"></div>') }
+    {
+        $("body").prepend(
+            '<div id="addMsnErro"style=""></div>')
+    }
        $("#addMsnErro").prepend(
-                '<div class="msgAlertas ' + tipomsg.toLowerCase() + '"  id="' + nomediv + '">' +
-                    '<span class="closeAlerta"></span>' +
-                    '<div class="tituloAlertas">' +
-                          '<span></span>' +
-                            '<h1>Atenção</h1>' +
-                    '</div>' +
-                   mensagem +
-                '</div>');
+           '<div class="msgAlertas ' + tipomsg.toLowerCase() + '"  id="' + nomediv + '"style="text-align: center; margin: 30px; width:100%;">' +
+                '<span class="closeAlerta"></span>' +
+                '<div class="tituloAlertas">' +
+                    '<span>' + iconMensagem + '</span>' +
+                    '<h1>Atenção</h1>' +
+                '</div>' +
+                mensagem +
+            '</div>');
     $(".closeAlerta").click(function () {
         $(this).parent('.msgAlertas').remove();
         $('#addMsnErro').remove();
