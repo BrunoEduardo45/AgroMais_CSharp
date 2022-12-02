@@ -1,9 +1,13 @@
-﻿<div id="header">
+﻿@model AgroMais.Models.Clientes
+
+@using AgroMais.Models
+
+<div id="header">
     <div id="topo">
         <h3><i class="fa fa-users topo"></i>Lista de clientes cadastrados</h3>
         <div id="div-btn-add">
             <p>Cadastrar novo cliente</p>
-            <a id="btn-add"  href="/Home/addCliente" style="text-decoration:none;"><i class="fa fa-plus"></i></a>
+            <a id="btn-add" href="/Home/addCliente" style="text-decoration:none;"><i class="fa fa-plus"></i></a>
         </div>
     </div>
 </div>
@@ -22,17 +26,22 @@
         </table>
         <table class="table">
             <tbody>
-                <tr style="text-align: center;">
-                    <th class="col-md-3 texto-lista">Bruno Eduardo</th>
-                    <td class="col-md-4 texto-lista">Centro, São Miguel das Matas, Nº18 - Bahia</td>
-                    <td class="col-md-2 texto-lista">(75)98888-8888</td>
-                    <td class="col-md-1 texto-lista">3</td>
-                    <td class="col-md-2">
-                        <button class="btn btn-primary btn-lista" onclick="abrirModal()"><i class="fa fa-search"></i></button>
-                        <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
-                        <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
-                    </td>
-                </tr>
+                @foreach (var cliente in Model.listaclientes)
+                {
+                    <tr style="text-align: center;">
+                        <input type="hidden" value="@cliente.CLI_ID" />
+                        <th class="col-md-3 texto-lista">@cliente.CLI_NOME </th>
+                        <td class="col-md-4 texto-lista">Centro, São Miguel das Matas, Nº18 - Bahia</td>
+                        <td class="col-md-2 texto-lista">(75)98888-8888</td>
+                        <td class="col-md-1 texto-lista">3</td>
+                        <td class="col-md-2">
+                            <button class="btn btn-primary btn-lista" onclick="abrirModal()"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
+                            <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+                @*foreach*@
             </tbody>
         </table>
     </div>

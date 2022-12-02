@@ -27,5 +27,8 @@ namespace AgroMais.Models
         public string CLI_CEP { get; set; }
         public string CLI_UF { get; set; }
         public string CLI_CNPJ { get; set; }
+
+        public List<Clientes> listaclientes { get; set; }
     }
+
 }
