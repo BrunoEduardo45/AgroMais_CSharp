@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AgroMais.Models;
 using AgroMais.DAO;
+using System.Collections.Generic;
 
 namespace AgroMais.Controllers
 {
@@ -17,7 +18,17 @@ namespace AgroMais.Controllers
         }
         public ActionResult Clientes()
         {
-            return View();
+            HomeDAO dao = new HomeDAO();
+            var cliente = new Clientes();
+            var lista = new List<Clientes>(); ;
+            try 
+            {
+                lista = dao.BuscarListaCliente();
+            }
+            catch (Exception ex) { }
+
+            cliente.listaclientes = lista;
+            return View(cliente);
         }
         public ActionResult addCliente()
         {

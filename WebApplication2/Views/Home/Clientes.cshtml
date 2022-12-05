@@ -2,6 +2,10 @@
 
 @using AgroMais.Models
 
+@{
+    ViewData["Title"] = "Clientes";
+}
+
 <div id="header">
     <div id="topo">
         <h3><i class="fa fa-users topo"></i>Lista de clientes cadastrados</h3>
@@ -13,7 +17,7 @@
 </div>
 <div id="container">
     <div id="lista">
-        <table class="table" id="topo-tabela">
+        <table id="datatable" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th class="col-md-3">Nome</th>
@@ -23,31 +27,44 @@
                     <th class="col-md-2"></th>
                 </tr>
             </thead>
-        </table>
-        <table class="table">
             <tbody>
-                @foreach (var cliente in Model.listaclientes)
+                @if (Model.listaclientes.Count() > 0)
                 {
-                    <tr style="text-align: center;">
-                        <input type="hidden" value="@cliente.CLI_ID" />
-                        <th class="col-md-3 texto-lista">@cliente.CLI_NOME </th>
-                        <td class="col-md-4 texto-lista">Centro, São Miguel das Matas, Nº18 - Bahia</td>
-                        <td class="col-md-2 texto-lista">(75)98888-8888</td>
-                        <td class="col-md-1 texto-lista">3</td>
-                        <td class="col-md-2">
-                            <button class="btn btn-primary btn-lista" onclick="abrirModal()"><i class="fa fa-search"></i></button>
-                            <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
-                            <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
+                    foreach (var cliente in Model.listaclientes)
+                    {
+                        <tr style="text-align: center;">
+                            <input type="hidden" value="@cliente.CLI_ID" />
+                            <th class="col-md-3 texto-lista">@cliente.CLI_NOME </th>
+                            <td class="col-md-4 texto-lista">@cliente.CLI_MUNICIPIO</td>
+                            <td class="col-md-2 texto-lista">@cliente.CLI_TELEFONE</td>
+                            <td class="col-md-1 texto-lista">3</td>
+                            <td class="col-md-2">
+                                <button class="btn btn-primary btn-lista" onclick="abrirModal()"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
+                                <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
                 }
-                @*foreach*@
+                else
+                {
+                    <p>Nenhum cliente encontrado</p>
+                }
             </tbody>
+            <tfoot>
+                <tr>
+                    <th class="col-md-3">Nome</th>
+                    <th class="col-md-4">Endereço</th>
+                    <th class="col-md-2">Telefone</th>
+                    <th class="col-md-1">Qtd. serviços</th>
+                    <th class="col-md-2"></th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
 
-<!--//////// MODAL CADASTRAR CLIENTE ////////-->
+<!--//////// Modal detalhes ////////-->
 <div class="modal" id="modal">
     <img src="/assets/img/CIMA.jpg" id="topo-modal" class="print">
     <div class="modal-content">
@@ -77,3 +94,8 @@
     </div>
     <img src="/assets/img/BAIXO.jpg" id="base-modal" class="print">
 </div>
+
+<script>
+
+    
+</script>
