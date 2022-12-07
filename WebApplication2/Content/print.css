@@ -1,0 +1,63 @@
+﻿/* CSS para impressão */
+@media print {
+
+    .modal {
+        display: block;
+    }
+    .modal-content {
+        font-family: Arial, Helvetica, sans-serif;
+        box-shadow: none;
+        width: 100%;
+        padding: 2cm;
+    }
+    img {
+        width: 100%;
+    }
+    #topo-modal {
+        top: 0;
+    }
+    #base-modal {
+        bottom: 0px;
+        position: fixed;
+    }
+    .print {
+        display: block;
+    }
+    .no-print {
+        display: none;
+    }
+
+
+    h1, h2, h3 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 16px;
+        border-bottom: 1px solid #ccc;
+        padding: 0 0 2px 0;
+        margin: 0 0 5px 0;
+    }
+
+    h3 {
+        font-size: 13px;
+        margin: 0 0 2px 0;
+    }
+    p {
+        font-size: 13px;
+        margin: 0 0 18px 0;
+    }
+    a {
+        text-decoration: underline;
+    }
+    a:link:after, a:visited:after {
+        content: " (" attr(href) ") ";
+        font-size: 90%;
+    }
+
+
+}
