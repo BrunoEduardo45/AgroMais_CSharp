@@ -79,8 +79,8 @@ C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\pt-br\System
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\pt-br\System.Web.WebPages.resources.dll
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\pt-br\System.Web.WebPages.Razor.resources.dll
-C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\AgroMais.csproj.AssemblyReference.cache
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\AgroMais.csproj.CoreCompileInputs.cache
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\AgroMais.csproj.CopyComplete
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\AgroMais.csproj.AssemblyReference.cache

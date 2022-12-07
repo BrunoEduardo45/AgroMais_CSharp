@@ -6,7 +6,7 @@
     ViewData["Title"] = "Clientes";
 }
 
-<div id="header">
+<div id="header" class="no-print">
     <div id="topo">
         <h3><i class="fa fa-users topo"></i>Lista de clientes cadastrados</h3>
         <div id="div-btn-add">
@@ -15,15 +15,15 @@
         </div>
     </div>
 </div>
-<div id="container">
+<div id="container" class="no-print">
     <div id="lista">
-        <table id="datatable" class="table table-striped" style="width:100%">
+        <table id="datatable" class="dataTable compact hover order-column row-border" style="width:100%">
             <thead>
                 <tr>
                     <th class="col-md-3">Nome</th>
-                    <th class="col-md-4">Endereço</th>
+                    <th class="col-md-3">Endereço</th>
                     <th class="col-md-2">Telefone</th>
-                    <th class="col-md-1">Qtd. serviços</th>
+                    <th class="col-md-2">Qtd. serviços</th>
                     <th class="col-md-2"></th>
                 </tr>
             </thead>
@@ -32,14 +32,13 @@
                 {
                     foreach (var cliente in Model.listaclientes)
                     {
-                        <tr style="text-align: center;">
-                            <input type="hidden" value="@cliente.CLI_ID" />
+                        <tr id="Cliente_@cliente.CLI_ID" value="@cliente.CLI_ID">
                             <th class="col-md-3 texto-lista">@cliente.CLI_NOME </th>
-                            <td class="col-md-4 texto-lista">@cliente.CLI_MUNICIPIO</td>
+                            <td class="col-md-3 texto-lista">@cliente.CLI_MUNICIPIO</td>
                             <td class="col-md-2 texto-lista">@cliente.CLI_TELEFONE</td>
-                            <td class="col-md-1 texto-lista">3</td>
-                            <td class="col-md-2">
-                                <button class="btn btn-primary btn-lista" onclick="abrirModal()"><i class="fa fa-search"></i></button>
+                            <td class="col-md-2 texto-lista">3</td>
+                            <td class="col-md-2" style="text-align:right;">
+                                <button class="btn btn-primary btn-lista" id="@cliente.CLI_ID" onclick="abrirModalCliente(this, event)"><i class="fa fa-search"></i></button>
                                 <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
                                 <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
                             </td>
@@ -48,54 +47,56 @@
                 }
                 else
                 {
-                    <p>Nenhum cliente encontrado</p>
+                    <tr>
+                        <td><span>Nenhum cliente encontrado</span></td>
+                    </tr>
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <th class="col-md-3">Nome</th>
-                    <th class="col-md-4">Endereço</th>
-                    <th class="col-md-2">Telefone</th>
-                    <th class="col-md-1">Qtd. serviços</th>
-                    <th class="col-md-2"></th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>
 
-<!--//////// Modal detalhes ////////-->
 <div class="modal" id="modal">
-    <img src="/assets/img/CIMA.jpg" id="topo-modal" class="print">
+    <img src="/Content/img/CIMA.jpg" id="topo-modal" class="print">
     <div class="modal-content">
         <div class="btn-modal no-print" style="text-align: right;">
             <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
         </div>
-        <div id="info-modal" class="conteudo">
-            <h2 class="titulo-modal">Detalhes do Serviço</h2>
-            <p><b>Nome: </b>Bruno Eduardo</p>
-            <p><b>Tipo de serviço: </b>Descrição do serviço</p>
-            <p><b>Status: </b>Em aberto</p>
-            <p><b>Propriedade: </b>Nome da propriedade</p>
-            <br>
-            <p><b>Complemento</b></p>
-            <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta nihil, cum voluptate! </p><p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta at quae facilis inventore molestiae soluta nihil, cum voluptate! </p><p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta nihil, cum voluptate! </p><p> Lorem ipsum dolor sit amet consectetur, adipisicingadipisicing elit. Rem culpa quia, rerum sed ullam magni, placeat quae facilis inventore molestiae soluta nihil, cum voluptate! </p>
-            <br>
-            <p><b>Valor: </b>R$1.000,00</p>
-            <p><b>Tipo: </b>Débito</p>
-            <p><b>Status do pagamento: </b>Pago</p>
-            <br>
-            <br>
+        <div id="info-modal" class="conteudo exemplo">
+            <!--Conteúdo-->
         </div>
         <div class="btn-modal no-print" style="text-align: center;">
             <button class="btn btn-success" onclick="window.print()"><i class="fa fa-print"></i></button>
             <p>Imprimir</p>
         </div>
     </div>
-    <img src="/assets/img/BAIXO.jpg" id="base-modal" class="print">
+    <img src="/Content/img/BAIXO.jpg" id="base-modal" class="print">
 </div>
 
 <script>
-
     
+
+    function abrirModalCliente(btn, e) {
+    e.preventDefault(btn);
+    var id = $(btn).attr('id');
+
+    $('#modal').addClass('modal-show');
+    $('.modal-content').addClass('modal-content-show');
+
+    var modal = `<h1 class="titulo-modal">Informações do cliente</h1>
+            <p><b>Nome: </b>@Model.listaclientes[5].CLI_NOME</p>
+            <p><b>CPF: </b>@Model.listaclientes[5].CLI_CPF</p>
+            <p><b>CNPJ: </b>@Model.listaclientes[5].CLI_CNPJ</p>
+            <p><b>RG: </b>@Model.listaclientes[5].CLI_RG</p>
+            <p><b>Idade: </b>@Model.listaclientes[5].CLI_IDADE</p>
+            <p><b>Data de Nascimento: </b>@Model.listaclientes[5].CLI_DATA_NASC</p>
+            <p><b>Profissão: </b>@Model.listaclientes[5].CLI_PROFISSAO</p>
+            <p><b>Telefone: </b>@Model.listaclientes[5].CLI_TELEFONE</p>
+            <p><b>Celular: </b>@Model.listaclientes[5].CLI_CELULAR</p>
+            <p><b>Email: </b>@Model.listaclientes[5].CLI_EMAIL</p>
+            <p><b>Endereço completo: </b>@Model.listaclientes[1].CLI_LOGRADOURO, N°@Model.listaclientes[1].CLI_NUMERO, @Model.listaclientes[1].CLI_BAIRRO, @Model.listaclientes[5].CLI_MUNICIPIO - @Model.listaclientes[1].CLI_UF. CEP:@Model.listaclientes[1].CLI_CEP</p>
+            <br>
+            <br>`;
+    document.getElementById('info-modal').innerHTML = modal;
+}
 </script>

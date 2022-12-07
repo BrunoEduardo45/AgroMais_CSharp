@@ -151,10 +151,14 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\me.jpg" />
     <Content Include="Content\Jquery\jquery-3.6.1.js" />
+    <Content Include="Content\Scripts\Datatable.js" />
     <Content Include="Content\Scripts\mascara.js" />
     <Content Include="Content\Scripts\mascara.min.js" />
+    <Content Include="Content\Scripts\scripts.js" />
+    <Content Include="Content\Scripts\modal.js" />
     <Content Include="Content\Scripts\ref_mascaras.html" />
-    <Content Include="Content\Scripts\script.js" />
+    <Content Include="Content\print.css" />
+    <Content Include="Content\datatable.css" />
     <Content Include="Content\style\style-login.css" />
     <Content Include="Content\style\style.css" />
     <Content Include="favicon.ico" />

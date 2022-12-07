@@ -8,7 +8,7 @@ body{
     padding: 0; 
     margin: 0; 
     height: 100vh; 
-    width: 100vw; 
+    width: 100%; 
     box-sizing: border-box; 
     display: flex;
     background-color: rgb(215, 215, 215); 
@@ -24,6 +24,7 @@ body{
     flex-direction: column;
     width: 350px;
     box-shadow: 0px 0px 15px #c0c0c0;
+    position:fixed;
 }
 #top{
     height: 85%;
@@ -90,6 +91,7 @@ nav i{
 #conteudo{
     width: 100%;
     padding: 30px;
+    margin-left:350px;
 }
 
 #topo {
