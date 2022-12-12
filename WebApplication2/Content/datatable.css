@@ -1,1 +1,56 @@
-﻿
+﻿/*registros por página*/
+#datatable_length {
+    margin-bottom: 15px;
+    background-color: #00000010;
+    border-radius: 100px;
+    padding: 5px 20px 5px 20px;
+}
+#datatable_length select {
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/*Pesquisar*/
+#datatable_filter {
+    margin-bottom: 15px;
+    background-color: #00000010;
+    border-radius: 100px;
+    padding: 10px 20px 10px 15px;
+}
+#datatable_filter input {
+    margin-left: 8px;
+    border-radius:5px;
+    background-color: #fff;
+
+}
+
+/*Tabela*/
+#datatable {
+}
+
+/*detalhes da lista*/
+#datatable_info {
+    margin-top: 15px;
+}
+
+/*Paginação*/
+#datatable_paginate {
+    margin-top: 15px;
+}
+#datatable_paginate span {
+    background-color: #00000015;
+    border-radius: 100px;
+    padding: 12px 0px;
+}
+#datatable_wrapper .current {
+    color: #fff !important;
+}
+#datatable_wrapper .paginate_button:hover {
+    border-radius: 100px;
+}
+#datatable_paginate span .current {
+    background-color: #3f6128;
+    border-radius:100px;
+    font-weight:bold;
+}

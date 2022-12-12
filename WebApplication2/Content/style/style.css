@@ -82,6 +82,12 @@ nav i{
 .btn-sair:hover{
     background-color: rgb(215, 215, 215); 
 }
+.btn-sair a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: -15px;
+    padding: 5px 50px;
+}
 #bottom{
     height: 15%;
     display: flex;
