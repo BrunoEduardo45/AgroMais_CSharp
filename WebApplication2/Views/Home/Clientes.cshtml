@@ -38,9 +38,9 @@
                             <td class="col-md-2 texto-lista">@cliente.CLI_TELEFONE</td>
                             <td class="col-md-2 texto-lista">3</td>
                             <td class="col-md-2" style="text-align:right;">
-                                <button class="btn btn-primary btn-lista" id="@cliente.CLI_ID" onclick="abrirModalCliente(this, event)"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary btn-lista" id="@cliente.CLI_ID" onclick="abrirModalDetalhesCliente(this, event)"><i class="fa fa-search"></i></button>
                                 <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
-                                <button class="btn btn-danger btn-lista"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger btn-lista" id="@cliente.CLI_ID" onclick="abrirModalDeletarCliente(this, event)"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     }
@@ -56,11 +56,11 @@
     </div>
 </div>
 
-<div class="modal" id="modal">
+<div class="modal" id="modal_detalhes">
     <img src="/Content/img/CIMA.jpg" id="topo-modal" class="print">
-    <div class="modal-content">
+    <div class="modal-content" id="modal-content-detalhes">
         <div class="btn-modal no-print" style="text-align: right;">
-            <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
+            <button class="btn btn-danger close" onclick="fecharModalDetalhes()" id="close"><i class="fa fa-close"></i></button>
         </div>
         <div id="info-modal" class="conteudo exemplo">
             <!--Conteúdo-->
@@ -73,15 +73,32 @@
     <img src="/Content/img/BAIXO.jpg" id="base-modal" class="print">
 </div>
 
+<div class="modal" id="modal_deletar">
+    <img src="/Content/img/CIMA.jpg" id="topo-modal" class="print">
+    <div class="modal-content" id="modal-content-deletar">
+        <div class="btn-modal no-print" style="text-align: right;">
+            <button class="btn btn-danger close" onclick="fecharModalDeletar()" id="close"><i class="fa fa-close"></i></button>
+        </div>
+        <div id="info-modal" class="conteudo exemplo" style="text-align:center;">
+            <h3 style="margin: 25px 20px 40px 20px; ">Deseja ecluir o Cliente X do seu banco de dados?</h3>
+        </div>
+        <div class="btn-modal no-print" style="text-align: center;">
+            <button class="btn btn-danger" onclick="window.print()">Fechar</i></button>
+            <button class="btn btn-success" onclick="window.print()">Excluir</button>
+        </div>
+    </div>
+    <img src="/Content/img/BAIXO.jpg" id="base-modal" class="print">
+</div>
+
 <script>
     
 
-    function abrirModalCliente(btn, e) {
+function abrirModalDetalhesCliente(btn, e) {
     e.preventDefault(btn);
     var id = $(btn).attr('id');
 
-    $('#modal').addClass('modal-show');
-    $('.modal-content').addClass('modal-content-show');
+    $('#modal_detalhes').addClass('modal-show');
+    $('#modal-content-detalhes').addClass('modal-content-show');
 
     var modal = `<h1 class="titulo-modal">Informações do cliente</h1>
             <p><b>Nome: </b>@Model.listaclientes[5].CLI_NOME</p>
@@ -98,5 +115,23 @@
             <br>
             <br>`;
     document.getElementById('info-modal').innerHTML = modal;
+}
+
+function abrirModalDeletarCliente(btn, e) {
+    e.preventDefault(btn);
+    var id = $(btn).attr('id');
+
+    $('#modal_deletar').addClass('modal-show');
+    $('#modal-content-deletar').addClass('modal-content-show');
+}
+
+function fecharModalDetalhes() {
+    $('#modal_detalhes').removeClass('modal-show');
+    $().removeClass('modal-content-show');
+}
+
+function fecharModalDeletar() {
+    $('#modal_deletar').removeClass('modal-show');
+    $('#modal-content-deletar').removeClass('modal-content-show');
 }
 </script>

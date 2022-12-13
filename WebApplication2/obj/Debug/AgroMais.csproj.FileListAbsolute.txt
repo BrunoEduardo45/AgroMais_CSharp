@@ -84,3 +84,7 @@ C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\AgroMa
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\WebApplication2.pdb
 C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\obj\Debug\AgroMais.csproj.AssemblyReference.cache
+C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\EntityFramework.dll
+C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\EntityFramework.SqlServer.dll
+C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\EntityFramework.xml
+C:\Users\Bruno\Documents\GitHub\AgroMais_CSharp\WebApplication2\bin\EntityFramework.SqlServer.xml
