@@ -25,7 +25,7 @@ namespace AgroMais.Controllers
             {
                 lista = dao.BuscarListaCliente();
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             cliente.listaclientes = lista;
             return View(cliente);
@@ -40,6 +40,7 @@ namespace AgroMais.Controllers
         }
 
         //--------------------------------------------------------//
+       
         [HttpPost]
         public JsonResult adicionarCliente(Clientes cliente)
         {
@@ -50,6 +51,17 @@ namespace AgroMais.Controllers
             }
             catch (Exception ex) { return Json(new { erro = true, mensagem = ex.Message, status = "ERRO" }); }
             return Json(new { erro = false, mensagem = "Cliente adicionado com sucesso!", status = "SUCESSO" });
+        }       
+        [HttpPost]
+        public JsonResult DeletarCliente(int id)
+        {
+            HomeDAO dao = new HomeDAO();
+            try
+            {
+                dao.DeletarCliente(id);
+            }
+            catch (Exception ex) { return Json(new { erro = true, mensagem = ex.Message, status = "ERRO" }); }
+            return Json(new { erro = false, mensagem = "Cliente removido com sucesso!", status = "SUCESSO" });
         }
     }
 }

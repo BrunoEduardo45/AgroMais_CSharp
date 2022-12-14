@@ -38,9 +38,9 @@
                             <td class="col-md-2 texto-lista">@cliente.CLI_TELEFONE</td>
                             <td class="col-md-2 texto-lista">3</td>
                             <td class="col-md-2" style="text-align:right;">
-                                <button class="btn btn-primary btn-lista" id="@cliente.CLI_ID" onclick="abrirModalDetalhesCliente(this, event)"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary btn-lista" id="" onclick="abrirModalDetalhesCliente(@cliente.CLI_ID)"><i class="fa fa-search"></i></button>
                                 <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
-                                <button class="btn btn-danger btn-lista" id="@cliente.CLI_ID" onclick="abrirModalDeletarCliente(this, event)"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger btn-lista" id="" onclick="DeletarCliente(@cliente.CLI_ID)"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     }
@@ -63,7 +63,21 @@
             <button class="btn btn-danger close" onclick="fecharModalDetalhes()" id="close"><i class="fa fa-close"></i></button>
         </div>
         <div id="info-modal" class="conteudo exemplo">
-            <!--Conteúdo-->
+            @*<h1 class="titulo-modal">Informações do cliente</h1>
+            <input type="hidden" value="" id="id_cliente"/>
+            <p><b>Nome: </b>@Model.listaclientes[1].CLI_NOME</p>
+            <p><b>CPF: </b>@Model.listaclientes[Model.ID].CLI_CPF</p>
+            <p><b>CNPJ: </b>@Model.listaclientes[Model.ID].CLI_CNPJ</p>
+            <p><b>RG: </b>@Model.listaclientes[Model.ID].CLI_RG</p>
+            <p><b>Idade: </b>@Model.listaclientes[Model.ID].CLI_IDADE</p>
+            <p><b>Data de Nascimento: </b>@Model.listaclientes[Model.ID].CLI_DATA_NASC</p>
+            <p><b>Profissão: </b>@Model.listaclientes[Model.ID].CLI_PROFISSAO</p>
+            <p><b>Telefone: </b>@Model.listaclientes[Model.ID].CLI_TELEFONE</p>
+            <p><b>Celular: </b>@Model.listaclientes[Model.ID].CLI_CELULAR</p>
+            <p><b>Email: </b>@Model.listaclientes[Model.ID].CLI_EMAIL</p>
+            <p><b>Endereço completo: </b>@Model.listaclientes[Model.ID].CLI_LOGRADOURO, N°@Model.listaclientes[Model.ID].CLI_NUMERO, @Model.listaclientes[Model.ID].CLI_BAIRRO, @Model.listaclientes[Model.ID].CLI_MUNICIPIO - @Model.listaclientes[Model.ID].CLI_UF. CEP:@Model.listaclientes[Model.ID].CLI_CEP</p>
+            <br>
+            <br>*@
         </div>
         <div class="btn-modal no-print" style="text-align: center;">
             <button class="btn btn-success" onclick="window.print()"><i class="fa fa-print"></i></button>
@@ -73,65 +87,68 @@
     <img src="/Content/img/BAIXO.jpg" id="base-modal" class="print">
 </div>
 
-<div class="modal" id="modal_deletar">
-    <img src="/Content/img/CIMA.jpg" id="topo-modal" class="print">
-    <div class="modal-content" id="modal-content-deletar">
-        <div class="btn-modal no-print" style="text-align: right;">
-            <button class="btn btn-danger close" onclick="fecharModalDeletar()" id="close"><i class="fa fa-close"></i></button>
-        </div>
-        <div id="info-modal" class="conteudo exemplo" style="text-align:center;">
-            <h3 style="margin: 25px 20px 40px 20px; ">Deseja ecluir o Cliente X do seu banco de dados?</h3>
-        </div>
-        <div class="btn-modal no-print" style="text-align: center;">
-            <button class="btn btn-danger" onclick="window.print()">Fechar</i></button>
-            <button class="btn btn-success" onclick="window.print()">Excluir</button>
-        </div>
-    </div>
-    <img src="/Content/img/BAIXO.jpg" id="base-modal" class="print">
-</div>
-
 <script>
-    
+    function abrirModalDetalhesCliente(id) {
+        var a = $('#id_cliente').val(id);
 
-function abrirModalDetalhesCliente(btn, e) {
-    e.preventDefault(btn);
-    var id = $(btn).attr('id');
+        document.querySelector("#info-modal").innerHTML = '<h1 class="titulo-modal">Informações do cliente</h1>' + 
+            '<input type="hidden" value="" id="id_cliente"/>' +
+            '<p><b>Nome: </b>" +@Model.listaclientes[1].CLI_NOME +"</p>' +
+                '<p><b>CPF: </b>" +@Model.listaclientes[Model.ID].CLI_CPF +"</p>' +
+                '<p><b>CNPJ: </b>" +@Model.listaclientes[Model.ID].CLI_CNPJ +"</p>' +
+                '<p><b>RG: </b>" +@Model.listaclientes[Model.ID].CLI_RG +"</p>' +
+                '<p><b>Idade: </b>" +@Model.listaclientes[Model.ID].CLI_IDADE +"</p>' +
+                '<p><b>Data de Nascimento: </b>" +@Model.listaclientes[Model.ID].CLI_DATA_NASC +"</p>' +
+                '<p><b>Profissão: </b>" +@Model.listaclientes[Model.ID].CLI_PROFISSAO +"</p>' +
+                '<p><b>Telefone: </b>" +@Model.listaclientes[Model.ID].CLI_TELEFONE +"</p>' +
+                '<p><b>Celular: </b>" +@Model.listaclientes[Model.ID].CLI_CELULAR +"</p>' +
+                '<p><b>Email: </b>" +@Model.listaclientes[Model.ID].CLI_EMAIL +"</p>' +
+                '<p><b>Endereço completo: </b>' +
+                @Model.listaclientes[Model.ID].CLI_LOGRADOURO + ', N°' +
+                @Model.listaclientes[Model.ID].CLI_NUMERO +', ' +
+                @Model.listaclientes[Model.ID].CLI_BAIRRO +', ' +
+                @Model.listaclientes[Model.ID].CLI_MUNICIPIO +' - ' +
+                @Model.listaclientes[Model.ID].CLI_UF +'. CEP:' +
+                @Model.listaclientes[Model.ID].CLI_CEP +'</p>' + '<br><br>';
 
-    $('#modal_detalhes').addClass('modal-show');
-    $('#modal-content-detalhes').addClass('modal-content-show');
 
-    var modal = `<h1 class="titulo-modal">Informações do cliente</h1>
-            <p><b>Nome: </b>@Model.listaclientes[5].CLI_NOME</p>
-            <p><b>CPF: </b>@Model.listaclientes[5].CLI_CPF</p>
-            <p><b>CNPJ: </b>@Model.listaclientes[5].CLI_CNPJ</p>
-            <p><b>RG: </b>@Model.listaclientes[5].CLI_RG</p>
-            <p><b>Idade: </b>@Model.listaclientes[5].CLI_IDADE</p>
-            <p><b>Data de Nascimento: </b>@Model.listaclientes[5].CLI_DATA_NASC</p>
-            <p><b>Profissão: </b>@Model.listaclientes[5].CLI_PROFISSAO</p>
-            <p><b>Telefone: </b>@Model.listaclientes[5].CLI_TELEFONE</p>
-            <p><b>Celular: </b>@Model.listaclientes[5].CLI_CELULAR</p>
-            <p><b>Email: </b>@Model.listaclientes[5].CLI_EMAIL</p>
-            <p><b>Endereço completo: </b>@Model.listaclientes[1].CLI_LOGRADOURO, N°@Model.listaclientes[1].CLI_NUMERO, @Model.listaclientes[1].CLI_BAIRRO, @Model.listaclientes[5].CLI_MUNICIPIO - @Model.listaclientes[1].CLI_UF. CEP:@Model.listaclientes[1].CLI_CEP</p>
-            <br>
-            <br>`;
-    document.getElementById('info-modal').innerHTML = modal;
-}
 
-function abrirModalDeletarCliente(btn, e) {
-    e.preventDefault(btn);
-    var id = $(btn).attr('id');
 
-    $('#modal_deletar').addClass('modal-show');
-    $('#modal-content-deletar').addClass('modal-content-show');
-}
 
-function fecharModalDetalhes() {
-    $('#modal_detalhes').removeClass('modal-show');
-    $().removeClass('modal-content-show');
-}
 
-function fecharModalDeletar() {
-    $('#modal_deletar').removeClass('modal-show');
-    $('#modal-content-deletar').removeClass('modal-content-show');
-}
+
+
+        debugger;
+        $('#modal_detalhes').val('modal-show');
+        $('#modal-content-detalhes').addClass('modal-content-show');
+    }
+    function fecharModalDetalhes() {
+        $('#modal_detalhes').removeClass('modal-show');
+        $().removeClass('modal-content-show');
+    }
+    function DeletarCliente(id) {
+        debugger;
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("DeletarCliente", "Home")',
+            data: id,
+            dataType: 'json',
+            success: function (retorno) {
+                removePreload();
+                if (retorno.erro === false)
+                {
+                    ShowMensagem(retorno.mensagem, retorno.status, 3000);
+                    setTimeout(function () { document.location.reload(true); }, 2000);
+                }
+                else {
+                    ShowMensagem(retorno.mensagem, retorno.status, 3000);
+                }
+                resultado = true;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                removePreload();
+                ShowMensagem(thrownError, "ERRO", 3000);
+            }
+        });
+    };
 </script>

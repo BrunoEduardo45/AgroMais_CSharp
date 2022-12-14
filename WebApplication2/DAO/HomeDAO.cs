@@ -43,6 +43,22 @@ namespace AgroMais.DAO
             {
                 throw new Exception(e.Message);
             }
+        }  
+        public object DeletarCliente(int id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            string procedure = @"delete from Clientes where CLI_ID = @id";
+            try
+            {
+                parameters.Add(new SqlParameter("@id", id));
+                DatabaseHelper.ExecuteNonQueryStoredProcedure(procedure, parameters.ToArray());
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }        
         public List<Clientes> BuscarListaCliente()
         {
