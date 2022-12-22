@@ -1,20 +1,17 @@
 ﻿@model AgroMais.Models.Clientes
-
-@using AgroMais.Models
-
-@{
-    ViewData["Title"] = "Clientes";
-}
+@using AgroMais
+@{ViewData["Title"] = "Clientes";}
 
 <div id="header" class="no-print">
     <div id="topo">
         <h3><i class="fa fa-users topo"></i>Lista de clientes cadastrados</h3>
         <div id="div-btn-add">
             <p>Cadastrar novo cliente</p>
-            <a id="btn-add" href="/Home/addCliente" style="text-decoration:none;"><i class="fa fa-plus"></i></a>
+            <button id="btn-add" onclick="abrirModalAdicionarCliente()" style="text-decoration:none; cursor:pointer;"><i class="fa fa-plus"></i></button>
         </div>
     </div>
 </div>
+
 <div id="container" class="no-print">
     <div id="lista">
         <table id="datatable" class="dataTable compact hover order-column row-border" style="width:100%">
@@ -33,16 +30,39 @@
                     foreach (var cliente in Model.listaclientes)
                     {
                         <tr id="Cliente_@cliente.CLI_ID" value="@cliente.CLI_ID">
-                            <th class="col-md-3 texto-lista">@cliente.CLI_NOME </th>
+
+                            <input type="hidden" id="nome_@cliente.CLI_ID" value="@cliente.CLI_NOME" />
+                            <input type="hidden" id="profissao_@cliente.CLI_ID" value="@cliente.CLI_PROFISSAO" />
+                            <input type="hidden" id="sexo_@cliente.CLI_ID" value="@cliente.CLI_SEXO" />
+                            <input type="hidden" id="nascimento_@cliente.CLI_ID" value="@cliente.CLI_DATA_NASC" />
+                            <input type="hidden" id="cpf_@cliente.CLI_ID" value="@cliente.CLI_CPF" />
+                            <input type="hidden" id="cnpj_@cliente.CLI_ID" value="@cliente.CLI_CNPJ" />
+                            <input type="hidden" id="rg_@cliente.CLI_ID" value="@cliente.CLI_RG" />
+                            <input type="hidden" id="telefone_@cliente.CLI_ID" value="@cliente.CLI_TELEFONE" />
+                            <input type="hidden" id="celular_@cliente.CLI_ID" value="@cliente.CLI_CELULAR" />
+                            <input type="hidden" id="email_@cliente.CLI_ID" value="@cliente.CLI_EMAIL" />
+                            <input type="hidden" id="cep_@cliente.CLI_ID" value="@cliente.CLI_CEP" />
+                            <input type="hidden" id="logradouro_@cliente.CLI_ID" value="@cliente.CLI_LOGRADOURO" />
+                            <input type="hidden" id="complemento_@cliente.CLI_ID" value="@cliente.CLI_COMPLEMENTO" />
+                            <input type="hidden" id="bairro_@cliente.CLI_ID" value="@cliente.CLI_BAIRRO" />
+                            <input type="hidden" id="municipio_@cliente.CLI_ID" value="@cliente.CLI_MUNICIPIO" />
+                            <input type="hidden" id="uf_@cliente.CLI_ID" value="@cliente.CLI_UF" />
+                            <input type="hidden" id="numero_@cliente.CLI_ID" value="@cliente.CLI_NUMERO" />
+                            <input type="hidden" id="idade_@cliente.CLI_IDADE" value="@cliente.CLI_IDADE" />
+
+                            @* |||||||||||||||||||||||||||| *@
+
+                            <td class="col-md-3 texto-lista">@cliente.CLI_NOME </td>
                             <td class="col-md-3 texto-lista">@cliente.CLI_MUNICIPIO</td>
                             <td class="col-md-2 texto-lista">@cliente.CLI_TELEFONE</td>
                             <td class="col-md-2 texto-lista">3</td>
                             <td class="col-md-2" style="text-align:right;">
-                                <button class="btn btn-primary btn-lista" id="" onclick="abrirModalDetalhesCliente(@cliente.CLI_ID)"><i class="fa fa-search"></i></button>
-                                <button class="btn btn-warning btn-lista"><i class="fa fa-pencil" style="color: #fff;"></i></button>
-                                <button class="btn btn-danger btn-lista" id="" onclick="DeletarCliente(@cliente.CLI_ID)"><i class="fa fa-trash"></i></button>
+                                <button style=" cursor: pointer;" class="btn btn-primary btn-lista" onclick="abrirModalDetalhesCliente(@cliente.CLI_ID)"><i class="fa fa-search"></i></button>
+                                <button style=" cursor: pointer;" class="btn btn-warning btn-lista" onclick="abrirModalAtualizarCliente(@cliente.CLI_ID)"><i class="fa fa-pencil" style="color: #fff;"></i></button>
+                                <button style=" cursor: pointer;" class="btn btn-danger btn-lista"  onclick="abrirModalDeletarCliente(@cliente.CLI_ID)"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
+
                     }
                 }
                 else
@@ -56,78 +76,302 @@
     </div>
 </div>
 
-<div class="modal" id="modal_detalhes">
+<div class="modal" id="modal">
     <img src="/Content/img/CIMA.jpg" id="topo-modal" class="print">
-    <div class="modal-content" id="modal-content-detalhes">
-        <div class="btn-modal no-print" style="text-align: right;">
-            <button class="btn btn-danger close" onclick="fecharModalDetalhes()" id="close"><i class="fa fa-close"></i></button>
-        </div>
-        <div id="info-modal" class="conteudo exemplo">
-            @*<h1 class="titulo-modal">Informações do cliente</h1>
-            <input type="hidden" value="" id="id_cliente"/>
-            <p><b>Nome: </b>@Model.listaclientes[1].CLI_NOME</p>
-            <p><b>CPF: </b>@Model.listaclientes[Model.ID].CLI_CPF</p>
-            <p><b>CNPJ: </b>@Model.listaclientes[Model.ID].CLI_CNPJ</p>
-            <p><b>RG: </b>@Model.listaclientes[Model.ID].CLI_RG</p>
-            <p><b>Idade: </b>@Model.listaclientes[Model.ID].CLI_IDADE</p>
-            <p><b>Data de Nascimento: </b>@Model.listaclientes[Model.ID].CLI_DATA_NASC</p>
-            <p><b>Profissão: </b>@Model.listaclientes[Model.ID].CLI_PROFISSAO</p>
-            <p><b>Telefone: </b>@Model.listaclientes[Model.ID].CLI_TELEFONE</p>
-            <p><b>Celular: </b>@Model.listaclientes[Model.ID].CLI_CELULAR</p>
-            <p><b>Email: </b>@Model.listaclientes[Model.ID].CLI_EMAIL</p>
-            <p><b>Endereço completo: </b>@Model.listaclientes[Model.ID].CLI_LOGRADOURO, N°@Model.listaclientes[Model.ID].CLI_NUMERO, @Model.listaclientes[Model.ID].CLI_BAIRRO, @Model.listaclientes[Model.ID].CLI_MUNICIPIO - @Model.listaclientes[Model.ID].CLI_UF. CEP:@Model.listaclientes[Model.ID].CLI_CEP</p>
-            <br>
-            <br>*@
-        </div>
-        <div class="btn-modal no-print" style="text-align: center;">
-            <button class="btn btn-success" onclick="window.print()"><i class="fa fa-print"></i></button>
-            <p>Imprimir</p>
-        </div>
+    <div class="modal-content" id="modal-content">
+        <!--MODAL-->
     </div>
     <img src="/Content/img/BAIXO.jpg" id="base-modal" class="print">
 </div>
 
 <script>
-    function abrirModalDetalhesCliente(id) {
-        var a = $('#id_cliente').val(id);
 
-        document.querySelector("#info-modal").innerHTML = '<h1 class="titulo-modal">Informações do cliente</h1>' + 
+    function abrirModalDetalhesCliente(ID) {
+        var nome = $('#nome_' + ID).val();
+        var cpf = $('#cpf_' + ID).val();
+        var cnpj = $('#cnpj_' + ID).val();
+        var rg = $('#rg_' + ID).val();
+        var idade = $('#idade_' + ID).val();
+        var nascimento = $('#nascimento_' + ID).val();
+        var profissao = $('#profissao_' + ID).val();
+        var telefone = $('#telefone_' + ID).val();
+        var celular = $('#celular_' + ID).val();
+        var email = $('#email_' + ID).val();
+        var logradouro = $('#logradouro_' + ID).val();
+        var numero = $('#numero_' + ID).val();
+        var bairro = $('#bairro_' + ID).val();
+        var municipio = $('#municipio_' + ID).val();
+        var uf = $('#uf_' + ID).val();
+        var cep = $('#cep_' + ID).val();
+
+        document.querySelector("#modal-content").innerHTML = 
+        `<div class="btn-modal no-print" style="text-align: right;">
+            <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
+        </div>
+        <div id="info-modal" class="conteudo">`+
+        '<h1 class="titulo-modal">Informações do cliente</h1>' +
             '<input type="hidden" value="" id="id_cliente"/>' +
-            '<p><b>Nome: </b>" +@Model.listaclientes[1].CLI_NOME +"</p>' +
-                '<p><b>CPF: </b>" +@Model.listaclientes[Model.ID].CLI_CPF +"</p>' +
-                '<p><b>CNPJ: </b>" +@Model.listaclientes[Model.ID].CLI_CNPJ +"</p>' +
-                '<p><b>RG: </b>" +@Model.listaclientes[Model.ID].CLI_RG +"</p>' +
-                '<p><b>Idade: </b>" +@Model.listaclientes[Model.ID].CLI_IDADE +"</p>' +
-                '<p><b>Data de Nascimento: </b>" +@Model.listaclientes[Model.ID].CLI_DATA_NASC +"</p>' +
-                '<p><b>Profissão: </b>" +@Model.listaclientes[Model.ID].CLI_PROFISSAO +"</p>' +
-                '<p><b>Telefone: </b>" +@Model.listaclientes[Model.ID].CLI_TELEFONE +"</p>' +
-                '<p><b>Celular: </b>" +@Model.listaclientes[Model.ID].CLI_CELULAR +"</p>' +
-                '<p><b>Email: </b>" +@Model.listaclientes[Model.ID].CLI_EMAIL +"</p>' +
+            '<p><b>Nome: </b>' + nome + '</p>' +
+                '<p><b>CPF: </b>' + cpf +'</p>' +
+                '<p><b>CNPJ: </b>' + cnpj +'</p>' +
+                '<p><b>RG: </b>' + rg +'</p>' +
+                '<p><b>Idade: </b>' + idade +'</p>' +
+                '<p><b>Data de Nascimento: </b>' + nascimento +'</p>' +
+                '<p><b>Profissão: </b>' + profissao +'</p>' +
+                '<p><b>Telefone: </b>' + telefone +'</p>' +
+                '<p><b>Celular: </b>' + celular +'</p>' +
+                '<p><b>Email: </b>' + email +'</p>' +
                 '<p><b>Endereço completo: </b>' +
-                @Model.listaclientes[Model.ID].CLI_LOGRADOURO + ', N°' +
-                @Model.listaclientes[Model.ID].CLI_NUMERO +', ' +
-                @Model.listaclientes[Model.ID].CLI_BAIRRO +', ' +
-                @Model.listaclientes[Model.ID].CLI_MUNICIPIO +' - ' +
-                @Model.listaclientes[Model.ID].CLI_UF +'. CEP:' +
-                @Model.listaclientes[Model.ID].CLI_CEP +'</p>' + '<br><br>';
+            logradouro + ', N°' + numero + ', ' + bairro + ', ' + municipio + ' - ' + uf + '. CEP:' + cep + '</p>' + '<br><br>' +
+            `</div>
+            <div class="btn-modal no-print" style="text-align: center;">
+                <button class="btn btn-success" onclick="window.print()"><i class="fa fa-print"></i></button>
+                <p>Imprimir</p>
+            </div>`;
 
-
-
-
-
-
-
-
-        debugger;
-        $('#modal_detalhes').val('modal-show');
-        $('#modal-content-detalhes').addClass('modal-content-show');
+        $('#modal').addClass('modal-show');
+        $('#modal-content').addClass('modal-content-show');
     }
-    function fecharModalDetalhes() {
-        $('#modal_detalhes').removeClass('modal-show');
-        $().removeClass('modal-content-show');
-    }
-    function DeletarCliente(id) {
+    function abrirModalAdicionarCliente() {
+        
+        document.querySelector("#modal-content").innerHTML =`
+        <div class="btn-modal no-print" style="text-align: right;">
+            <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
+        </div>
+        <div id="info-modal" class="conteudo">
+        <h1>Adicionar novo cliente</h1><br class="dont-print"><br class="dont-print">
+            <form class="row" id="formulario">
+                <div class="col-md-4 mb-4">
+                    <label><b>Nome:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_NOME" id="CLI_NOME">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Profissão:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_PROFISSAO" id="CLI_PROFISSAO">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label><b>Sexo:</b></label>
+                    <select class="form-select" name="CLI_SEXO" id="CLI_SEXO" value="">
+                        <option value="" selected>Selecione</option>
+                        <option value="0">Masculino</option>
+                        <option value="1">Feminino</option>
+                    </select>
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label><b>Data de Nascimento:</b></label>
+                    <input type="date" class="form-control date" value="" name="CLI_DATA_NASC" id="CLI_DATA_NASC">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>CPF:</b></label>
+                    <input type="text" class="form-control cpf" value="" name="CLI_CPF" id="CLI_CPF" placeholder="###.###.###-##" onkeyup="mascara('###.###.###-##',this,event,true)" maxlength="14">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>CNPJ:</b></label>
+                    <input type="text" class="form-control cnpj" value="" name="CLI_CNPJ" id="CLI_CNPJ" placeholder="##.###.###/####-##" onkeyup="mascara('##.###.###/####-##',this,event,true)" maxlength="18">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>RG:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_RG" id="CLI_RG" placeholder="##.###.###-#" onkeyup="mascara('##.###.###-#',this,event,true)" maxlength="12">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Telefone:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_TELEFONE" id="CLI_TELEFONE" placeholder="(##)####.####" onkeyup="mascara('(##)####.####',this,event,true)" maxlength="13">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Celular:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_CELULAR" id="CLI_CELULAR" placeholder="(##)#####.####" onkeyup="mascara('(##)#####.####',this,event,true)" maxlength="14">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Email:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_EMAIL" id="CLI_EMAIL">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>CEP:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_CEP" id="cep" placeholder="##.###-###" onkeyup="mascara('##.###-###',this,event,true)" maxlength="10">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Logradouro:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_LOGRADOURO" id="logradouro">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Complemento:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_COMPLEMENTO" id="complemento">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Bairro:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_BAIRRO" id="bairro">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Município:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_MUNICIPIO" id="localidade">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label><b>UF:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_UF" id="uf">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label><b>Número:</b></label>
+                    <input type="text" class="form-control" value="" name="CLI_NUMERO" id="numero">
+                    <br class="dont-print">
+                </div>
+            </form>
+        </div>
+        <div class="btn-modal no-print" style="text-align: center;">
+            <button class="btn-cadastrar" onclick=""><i class="fa fa-plus"></i>   Adicionar</button>
+        </div>`;
+
+        abrirModal()
+    };
+    function abrirModalAtualizarCliente(ID) {
+        var nome = $('#nome_' + ID).val();
+        var sexo = $('#sexo_' + ID).val();
+        var cpf = $('#cpf_' + ID).val();
+        var cnpj = $('#cnpj_' + ID).val();
+        var rg = $('#rg_' + ID).val();
+        var nascimento = $('#nascimento_' + ID).val();
+        var profissao = $('#profissao_' + ID).val();
+        var telefone = $('#telefone_' + ID).val();
+        var celular = $('#celular_' + ID).val();
+        var email = $('#email_' + ID).val();
+        var logradouro = $('#logradouro_' + ID).val();
+        var numero = $('#numero_' + ID).val();
+        var bairro = $('#bairro_' + ID).val();
+        var municipio = $('#municipio_' + ID).val();
+        var complemento = $('#complemento_' + ID).val();
+        var uf = $('#uf_' + ID).val();
+        var cep = $('#cep_' + ID).val();
+
+        document.querySelector("#modal-content").innerHTML = `<div class="btn-modal no-print" style="text-align: right;">
+            <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
+        </div>
+        <div id="info-modal" class="conteudo">
+
+        <h1>Atualizar dados do cliente</h1><br class="dont-print"><br class="dont-print">
+            <form class="row" id="formulario">
+                <div class="col-md-4 mb-4">
+                    <label><b>Nome:</b></label>
+                    <input type="text" class="form-control" value="`+nome+`" name="CLI_NOME" id="CLI_NOME">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Profissão:</b></label>
+                    <input type="text" class="form-control" value="`+ profissao +`" name="CLI_PROFISSAO" id="CLI_PROFISSAO">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>CPF:</b></label>
+                    <input type="text" class="form-control cpf" value="`+ cpf +`" name="CLI_CPF" id="CLI_CPF" placeholder="###.###.###-##" onkeyup="mascara('###.###.###-##',this,event,true)" maxlength="14">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>CNPJ:</b></label>
+                    <input type="text" class="form-control cnpj" value="`+ cnpj +`" name="CLI_CNPJ" id="CLI_CNPJ" placeholder="##.###.###/####-##" onkeyup="mascara('##.###.###/####-##',this,event,true)" maxlength="18">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>RG:</b></label>
+                    <input type="text" class="form-control" value="`+ rg +`" name="CLI_RG" id="CLI_RG" placeholder="##.###.###-#" onkeyup="mascara('##.###.###-#',this,event,true)" maxlength="12">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Telefone:</b></label>
+                    <input type="text" class="form-control" value="`+ telefone +`" name="CLI_TELEFONE" id="CLI_TELEFONE" placeholder="(##)####.####" onkeyup="mascara('(##)####.####',this,event,true)" maxlength="13">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Celular:</b></label>
+                    <input type="text" class="form-control" value="`+ celular +`" name="CLI_CELULAR" id="CLI_CELULAR" placeholder="(##)#####.####" onkeyup="mascara('(##)#####.####',this,event,true)" maxlength="14">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Email:</b></label>
+                    <input type="text" class="form-control" value="`+ email +`" name="CLI_EMAIL" id="CLI_EMAIL">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>CEP:</b></label>
+                    <input type="text" class="form-control" value="`+ cep +`" name="CLI_CEP" id="cep" placeholder="##.###-###" onkeyup="mascara('##.###-###',this,event,true)" maxlength="10">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Logradouro:</b></label>
+                    <input type="text" class="form-control" value="`+ logradouro +`" name="CLI_LOGRADOURO" id="logradouro">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Complemento:</b></label>
+                    <input type="text" class="form-control" value="`+ complemento +`" name="CLI_COMPLEMENTO" id="complemento">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Bairro:</b></label>
+                    <input type="text" class="form-control" value="`+ bairro +`" name="CLI_BAIRRO" id="bairro">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Município:</b></label>
+                    <input type="text" class="form-control" value="`+ municipio +`" name="CLI_MUNICIPIO" id="localidade">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>UF:</b></label>
+                    <input type="text" class="form-control" value="`+ uf +`" name="CLI_UF" id="uf">
+                    <br class="dont-print">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label><b>Número:</b></label>
+                    <input type="text" class="form-control" value="`+ numero +`" name="CLI_NUMERO" id="numero">
+                    <br class="dont-print">
+                </div>
+            </form>
+        </div>
+        <div class="btn-modal no-print" style="text-align: center;">
+            <button class="btn-cadastrar" onclick=""><i class="fa fa-pencil"></i>   Atualizar</button>
+        </div>`;
+
+        $('#modal').addClass('modal-show');
+        $('#modal-content').addClass('modal-content-show');
+    };
+    function abrirModalDeletarCliente(ID) {
+        var nome = $('#nome_' + ID).val();
+         
+        document.querySelector("#modal-content").innerHTML = 
+        `<div class="btn-modal no-print" style="text-align: right;">
+            <button class="btn btn-danger close" onclick="fecharModal()" id="close"><i class="fa fa-close"></i></button>
+        </div>
+        <div id="info-modal" class="conteudo text-center m-5">
+            <h1>Deseja mesmo deletar `+nome+` da sua lista de clientes?</h1>
+        </div>
+        <div class="btn-modal no-print" style="text-align: center;">
+            <button class="btn-cadastrar bg-danger" onclick=""><i class="fa fa-x"></i>   Deletar</button>
+        </div>`;
+
+        abrirModal();
+    };
+
+    /*--------------------*/
+
+    function deletarCliente(id) {
         debugger;
+        mostraPreload();
+
+        var resultado = false;
         $.ajax({
             type: 'post',
             url: '@Url.Action("DeletarCliente", "Home")',
@@ -150,5 +394,8 @@
                 ShowMensagem(thrownError, "ERRO", 3000);
             }
         });
+        return resultado;
     };
+
 </script>
+<script></script>

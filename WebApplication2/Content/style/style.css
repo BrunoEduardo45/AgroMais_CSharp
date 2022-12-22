@@ -65,6 +65,7 @@ nav i{
     color:#fff;
     margin-left:-15px;
     padding:5px 50px;
+    cursor: pointer;
 }
 .btn-sair{
     width: 100%; 
@@ -87,7 +88,8 @@ nav i{
     color: #fff;
     margin-left: -15px;
     padding: 5px 50px;
-    font-weight:bold;
+    font-weight:bold;    
+    cursor: pointer;
 }
 #bottom{
     height: 15%;
@@ -122,10 +124,11 @@ nav i{
 #topo h3 i{
     margin-right:15px;
 }
-#div-btn-add{
+#div-btn-add {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 #div-btn-add p{
     margin-bottom: 0px;
@@ -172,9 +175,10 @@ table{
     margin-bottom: 0px;
 }
 
-.btn-lista{
+.btn-lista {
     border-radius: 20px;
     margin: 5px;
+    cursor: pointer;
 }
 .texto-lista{
     vertical-align: middle;
@@ -218,11 +222,12 @@ table{
   }
   
   .modal-content {
-    width: 40%;
+    width: auto;
     height: auto;
     max-height: 80%;
-/*    overflow-y: scroll;
-*/  padding: 30px;
+    overflow-y: scroll;
+    padding: 30px;
+    margin:0px 150px;
     background-color: white;
     border-radius: 11px;
     display: flex;

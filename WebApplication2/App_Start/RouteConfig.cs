@@ -34,6 +34,11 @@ namespace WebApplication2
                 new {controller = "Home", action = "addCliente" }
             );
             routes.MapRoute(
+                "updatecliente",
+                "updatecliente",
+                new {controller = "Home", action = "updateCliente" }
+            );
+            routes.MapRoute(
                "configuracao",
                "configuracao",
                new { controller = "Home", action = "Configuracao" }
