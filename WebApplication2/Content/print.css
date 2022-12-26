@@ -1,14 +1,19 @@
 ﻿/* CSS para impressão */
 @media print {
-
+    #sidebar {
+        display:none;
+    }
     .modal {
         display: block;
     }
     .modal-content {
+        display: block;
         font-family: Arial, Helvetica, sans-serif;
         box-shadow: none;
+        margin: 2cm;
         width: 100%;
-        padding: 2cm;
+        text-align: left;
+        font-size: 16px;
     }
     img {
         width: 100%;
@@ -26,29 +31,15 @@
     .no-print {
         display: none;
     }
-
-
-    h1, h2, h3 {
-        font-weight: bold;
-    }
-
     h1 {
-        font-size: 24px;
+        font-weight: bold;
+        font-size: 32px;
     }
-
-    h2 {
-        font-size: 16px;
-        border-bottom: 1px solid #ccc;
-        padding: 0 0 2px 0;
-        margin: 0 0 5px 0;
-    }
-
-    h3 {
-        font-size: 13px;
-        margin: 0 0 2px 0;
+    h2, h3,h4 {
+        font-weight: bold;
+        font-size: 28px;
     }
     p {
-        font-size: 13px;
         margin: 0 0 18px 0;
     }
     a {
@@ -58,6 +49,4 @@
         content: " (" attr(href) ") ";
         font-size: 90%;
     }
-
-
 }

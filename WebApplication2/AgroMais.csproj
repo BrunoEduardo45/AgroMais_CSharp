@@ -235,11 +235,7 @@
     <Content Include="Views\Home\Configuracao.cshtml" />
     <Content Include="Views\Home\Clientes.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\addCliente.cshtml" />
-    <Content Include="Views\Home\addServico.cshtml" />
-    <Content Include="Views\Home\addPropiedade.cshtml" />
     <Content Include="Scripts\jsconfig.json" />
-    <Content Include="Views\Home\updateCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

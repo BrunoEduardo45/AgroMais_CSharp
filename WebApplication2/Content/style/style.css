@@ -225,7 +225,7 @@ table{
     width: auto;
     height: auto;
     max-height: 80%;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 30px;
     margin:0px 150px;
     background-color: white;

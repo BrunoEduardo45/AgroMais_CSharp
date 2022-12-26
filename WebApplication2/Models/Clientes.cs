@@ -14,6 +14,7 @@ namespace AgroMais.Models
         public bool CLI_SEXO { get; set; }
         public int CLI_IDADE { get; set; }
         public DateTime CLI_DATA_NASC { get; set; }
+        public string NASCIMENO { get; set; }
         public DateTime CLI_DATA_CADASTRO { get; set; }
         public string CLI_PROFISSAO { get; set; }
         public string CLI_TELEFONE { get; set; }
