@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using SAPS.Util;
 using System.Runtime.Remoting.Messaging;
 using Microsoft.Ajax.Utilities;
+using static AgroMais.Models.Servicos;
 
 namespace AgroMais.DAO
 {
@@ -120,7 +121,6 @@ namespace AgroMais.DAO
                             try { clientes.CLI_CPF = reader.GetString(reader.GetOrdinal("CLI_CPF")); } catch { }
                             try { clientes.CLI_RG = reader.GetString(reader.GetOrdinal("CLI_RG")); } catch { }
                             try { clientes.CLI_SEXO = reader.GetBoolean(reader.GetOrdinal("CLI_SEXO")); } catch { }
-                            try { clientes.CLI_IDADE = reader.GetInt32(reader.GetOrdinal("CLI_IDADE")); } catch { }
                             try { clientes.NASCIMENO = reader.GetString(reader.GetOrdinal("CLI_DATA_NASC")); } catch { }
                             try { clientes.CLI_DATA_CADASTRO = reader.GetDateTime(reader.GetOrdinal("CLI_DATA_CADASTRO")); } catch { }
                             try { clientes.CLI_PROFISSAO = reader.GetString(reader.GetOrdinal("CLI_PROFISSAO")); } catch { }
@@ -145,6 +145,183 @@ namespace AgroMais.DAO
                 throw new Exception(e.Message);
             }
             return listaClientes;
+        }
+        public List<TipoServico> BuscarTiposServicos()
+        {
+            TipoServico tipoServico = null;
+            List<TipoServico> listaTipoServico = new List<TipoServico>();
+            string query = @"Select * from Tipo_Servico";
+            SqlDataReader reader = null;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            try
+            {
+                reader = DatabaseHelper.ExecuteReader(query, parameters.ToArray());
+                using (reader)
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            tipoServico = new TipoServico();
+                            try { tipoServico.TIP_SRV_ID = reader.GetInt32(reader.GetOrdinal("TIP_SRV_ID")); } catch { }
+                            try { tipoServico.TIP_SRV_NOME = reader.GetString(reader.GetOrdinal("TIP_SRV_NOME")); } catch { }
+                            listaTipoServico.Add(tipoServico);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return listaTipoServico;
+        }
+
+        //-------------------------------------------------------//
+
+        public object adicionarServico(Servicos servico)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            string procedure = @"sp_addServico";
+            try
+            {
+                #region
+                parameters.Add(new SqlParameter("@SRV_CLI_ID", servico.SRV_CLI_ID));
+                parameters.Add(new SqlParameter("@SRV_PROP_ID", servico.SRV_PROP_ID));
+                parameters.Add(new SqlParameter("@SRV_TIPO", servico.SRV_TIPO));
+                parameters.Add(new SqlParameter("@SRV_STATUS", servico.SRV_STATUS));
+                parameters.Add(new SqlParameter("@SRV_COMPLEMENTO", servico.SRV_COMPLEMENTO));
+                parameters.Add(new SqlParameter("@SRV_VALOR", servico.SRV_VALOR));
+                parameters.Add(new SqlParameter("@SRV_TIPO_PAGAMENTO", servico.SRV_TIPO_PAGAMENTO));
+                parameters.Add(new SqlParameter("@SRV_STATUS_PAGAMENTO", servico.SRV_STATUS_PAGAMENTO));
+                parameters.Add(new SqlParameter("@SRV_VALOR_PAGO", servico.SRV_VALOR_PAGO));                
+                #endregion
+                DatabaseHelper.ExecuteNonQueryStoredProcedure(procedure, parameters.ToArray());
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public object atualizarServico(Servicos servico)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            string procedure = @"sp_updateServico";
+            try
+            {
+                #region
+                parameters.Add(new SqlParameter("@SRV_ID", servico.SRV_ID));
+                parameters.Add(new SqlParameter("@SRV_CLI_ID", servico.SRV_CLI_ID));
+                parameters.Add(new SqlParameter("@SRV_PROP_ID", servico.SRV_PROP_ID));
+                parameters.Add(new SqlParameter("@SRV_TIPO", servico.SRV_TIPO));
+                parameters.Add(new SqlParameter("@SRV_STATUS", servico.SRV_STATUS));
+                parameters.Add(new SqlParameter("@SRV_COMPLEMENTO", servico.SRV_COMPLEMENTO));
+                parameters.Add(new SqlParameter("@SRV_VALOR", servico.SRV_VALOR));
+                parameters.Add(new SqlParameter("@SRV_TIPO_PAGAMENTO", servico.SRV_TIPO_PAGAMENTO));
+                parameters.Add(new SqlParameter("@SRV_STATUS_PAGAMENTO", servico.SRV_STATUS_PAGAMENTO));
+                parameters.Add(new SqlParameter("@SRV_VALOR_PAGO", servico.SRV_VALOR_PAGO));
+                #endregion
+                DatabaseHelper.ExecuteNonQueryStoredProcedure(procedure, parameters.ToArray());
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public object deletarServico(int id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            string query = @"delete from Servicos where srv_id = @srv_id";
+            try
+            {
+                parameters.Add(new SqlParameter("@srv_id", id));
+                DatabaseHelper.ExecuteNonQuery(query, parameters.ToArray());
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public List<Servicos> BuscarListaServicos()
+        {
+            Servicos servicos = null;
+            List<Servicos> listaServicos = new List<Servicos>();
+            string query = @"Select * from Servicos
+                            inner join clientes on SRV_CLI_ID = cli_id
+                            inner join tipo_servico on tip_srv_id = srv_tipo";
+            SqlDataReader reader = null;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            try
+            {
+                reader = DatabaseHelper.ExecuteReader(query, parameters.ToArray());
+
+                using (reader)
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            servicos = new Servicos();
+                            try { servicos.SRV_CLI_ID = reader.GetInt32(reader.GetOrdinal("SRV_CLI_ID")); } catch { }
+                            try { servicos.SRV_PROP_ID = reader.GetInt32(reader.GetOrdinal("SRV_PROP_ID")); } catch { }
+                            try { servicos.SRV_TIPO = reader.GetInt32(reader.GetOrdinal("SRV_TIPO")); } catch { }
+                            try { servicos.SRV_STATUS = reader.GetInt32(reader.GetOrdinal("SRV_STATUS")); } catch { }
+                            try { servicos.SRV_COMPLEMENTO = reader.GetString(reader.GetOrdinal("SRV_COMPLEMENTO")); } catch { }
+                            try { servicos.SRV_VALOR = reader.GetInt32(reader.GetOrdinal("SRV_VALOR")); } catch { }
+                            try { servicos.SRV_TIPO_PAGAMENTO = reader.GetInt32(reader.GetOrdinal("SRV_TIPO_PAGAMENTO")); } catch { }
+                            try { servicos.SRV_STATUS_PAGAMENTO = reader.GetInt32(reader.GetOrdinal("SRV_STATUS_PAGAMENTO")); } catch { }
+                            try { servicos.SRV_VALOR_PAGO = reader.GetInt32(reader.GetOrdinal("SRV_VALOR_PAGO")); } catch { }
+                            try { servicos.SRV_DATA_CADASTRO = reader.GetString(reader.GetOrdinal("SRV_DATA_CADASTRO")); } catch { }
+                            try { servicos.CLI_NOME = reader.GetString(reader.GetOrdinal("CLI_NOME")); } catch { }
+                            try { servicos.SRV_NOME = reader.GetString(reader.GetOrdinal("TIP_SRV_NOME")); } catch { }
+
+                            listaServicos.Add(servicos);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return listaServicos;
+        }
+        public List<Propriedades> BuscarPropriedadesCliente(int id)
+        {
+            Propriedades propriedade = null;
+            List<Propriedades> listaPropriedades = new List<Propriedades>();
+            string query = @"Select * from Propriedades where prop_cli_id = @cli_id";
+            SqlDataReader reader = null;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            try
+            {
+                parameters.Add(new SqlParameter("@cli_id", id));
+                reader = DatabaseHelper.ExecuteReader(query, parameters.ToArray());
+                using (reader)
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            propriedade = new Propriedades();
+                            try { propriedade.PROP_ID = reader.GetInt32(reader.GetOrdinal("PROP_ID")); } catch { }
+                            try { propriedade.PROP_NOME = reader.GetString(reader.GetOrdinal("PROP_NOME")); } catch { }
+                            listaPropriedades.Add(propriedade);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return listaPropriedades;
         }
     }
 }
